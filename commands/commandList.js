@@ -1,4 +1,4 @@
-const { mc_rcon_host, mc_rcon_port, mc_rcon_pass } = require("../config.json");
+const { ip_for_embed, mc_rcon_host, mc_rcon_port, mc_rcon_pass } = require("../config.json");
 const Rcon = require("rcon");
 
 var conn = new Rcon(mc_rcon_host, mc_rcon_port, mc_rcon_pass);
@@ -23,27 +23,42 @@ module.exports = {
         let playerCount = rconReply[0];
         playerCount = playerCount.replace("There are ", "");
         playerCount = playerCount.replace(" players online", "");
-        
         let players = rconReply[1];
-        players = players.split(",");
-        let playerStr = "";
-        for (p in players) {
-            playerStr = playerStr + "\n" + players[p];
+
+        if (playerCount.split("/")[0] !== "0") {
+            players = players.split(",");
+            let playerStr = "";
+            for (p in players) {
+                playerStr = playerStr + "\n" + players[p];
+            }
+            const replyEmbed = new EmbedBuilder()
+                .setColor(0x00AA00)
+                .setTitle("Minecraft Server Info")
+                .setDescription("IP: " + ip_for_embed)
+                .addFields(
+                    {name : "Status", value: "Online :green_circle:"},
+                    {name: "Playercount", value: playerCount},
+                    {name: "Players", value: playerStr}
+                )
+                .setTimestamp()
+                .setFooter({text: "Info from"});
+    
+            reply = await interaction.reply({embeds: [replyEmbed]});
+        } else {
+            const replyEmbed = new EmbedBuilder()
+                .setColor(0x00AA00)
+                .setTitle("Minecraft Server Info")
+                .setDescription("IP: " + ip_for_embed)
+                .addFields(
+                    {name : "Status", value: "Online :green_circle:"},
+                    {name: "Playercount", value: playerCount}
+                )
+                .setTimestamp()
+                .setFooter({text: "Info from"});
+    
+            reply = await interaction.reply({embeds: [replyEmbed]});
         }
-
-        const replyEmbed = new EmbedBuilder()
-            .setColor(0x00AA00)
-            .setTitle("Minecraft Server Info")
-            .setDescription("IP: " + mc_rcon_host)
-            .addFields(
-                {name : "Status", value: "Online :green_circle:"},
-                {name: "Playercount", value: playerCount},
-                {name: "Players", value: playerStr}
-            )
-            .setTimestamp()
-            .setFooter({text: "Info from"});
-
-        reply = await interaction.reply({embeds: [replyEmbed]});
+        
         process.on("uncaughtException", function () {
             //console.error(err);
             //console.log("Node NOT Exiting...");
@@ -55,7 +70,7 @@ module.exports = {
         const replyEmbed = new EmbedBuilder()
             .setColor(0x00AA00)
             .setTitle("Minecraft Server Info")
-            .setDescription("IP: " + mc_rcon_host)
+            .setDescription("IP: " + ip_for_embed)
             .addFields(
                 {name : "Status", value: "Offline :red_circle:"}
             )

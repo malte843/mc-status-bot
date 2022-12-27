@@ -3,5 +3,6 @@
     "appId": "your-appId",
     "mc_rcon_host": "your-hostname",
     "mc_rcon_port": 25575,
-    "mc_rcon_pass": "your-pass"
+    "mc_rcon_pass": "your-pass",
+    "ip_for_embed": "mc.example.de"
 }
