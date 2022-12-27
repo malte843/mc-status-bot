@@ -20,3 +20,4 @@ Commands also work in dm with bot
 
 ### Preview of `/list` command:
 
+![Screenshot_20221227_184421](https://user-images.githubusercontent.com/41925758/209704560-90e97432-65cb-427e-98d8-02d8937bd4ab.png)
