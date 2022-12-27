@@ -1,0 +1,7 @@
+{
+    "token": "your-token",
+    "appId": "your-appId",
+    "mc_rcon_host": "your-hostname",
+    "mc_rcon_port": 25575,
+    "mc_rcon_pass": "your-pass"
+}
