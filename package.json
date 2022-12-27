@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/jdjdpsjsjdlsk/mc-status-bot/issues"
   },
-  "homepage": "https://github.com/jdjdpsjsjdlsk/mc-status-bot#readme"
+  "homepage": "https://github.com/jdjdpsjsjdlsk/mc-status-bot#readme",
+  "dependencies": {
+    "discord.js": "^14.7.1",
+    "rcon": "^1.1.0"
+  }
 }
